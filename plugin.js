@@ -56,7 +56,7 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
             popup.className = 'popup';
             popup.id = 'gwf-popup';
             var cancel = document.createElement('button');
-            cancel.className = config.gwfplugin.cancel.class || 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only widget_btn design-btn btn-cancel ui-state-active ui-state-focus';
+            cancel.className = config.gwfplugin.cancel.className || 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only widget_btn design-btn btn-cancel ui-state-active ui-state-focus';
             cancel.innerHTML = config.gwfplugin.cancel.label || 'Cancel';
             cancel.onclick = function () {
                 popup.style.display = 'none';
@@ -65,6 +65,7 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
             message.innerHTML = config.gwfplugin.message.text || '<h5>Enter Google Web Fonts here:</h5>';
             var input = document.createElement('input');
             input.setAttribute('list', 'fontNames');
+            input.setAttribute('id', 'fontNamesInput');
             var dataList = document.createElement('datalist');
             dataList.setAttribute('id', 'fontNames');
             var dataListFallback = document.createElement('select');
@@ -81,7 +82,7 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
             };
             var okButton = document.createElement('button');
             okButton.innerHTML = config.gwfplugin.ok.label || 'Ok';
-            okButton.className = config.gwfplugin.ok.class || 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only widget_btn design-btn ui-state-focus';
+            okButton.className = config.gwfplugin.ok.className || 'ui-button ui-widget ui-state-default ui-corner-all ui-button-text-only widget_btn design-btn ui-state-focus';
             okButton.onclick = function (e) {
                 popup.extraClickValue(input.value);
                 input.value = '';
