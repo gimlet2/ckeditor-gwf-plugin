@@ -1,4 +1,4 @@
-ckeditor-gwf-plugin
+<img src="http://s1.ckeditor.com/sites/default/files/styles/logo/public/ckeditor-gwf-plugin/gimlet1_0.png?itok=AFdwtW48" align="left" width="50px"/>ckeditor-gwf-plugin
 ===================
 
 Plugin for CKEditor to add GoogleWebFonts support.
