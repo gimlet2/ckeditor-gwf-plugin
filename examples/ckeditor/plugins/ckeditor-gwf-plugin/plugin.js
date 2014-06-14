@@ -25,11 +25,21 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
                             self.popup.style.top = (window.innerHeight - 200) / 2 + 'px';
                             self.popup.style.left = (window.innerWidth - 150) / 2 + 'px';
                             self.popup.extraClickValue = function (v) {
-                                var css = document.createElement('link');
-                                css.setAttribute('type', 'text/css');
-                                css.setAttribute('rel', 'stylesheet');
-                                css.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + v);
-                                ev.editor.editable().$.appendChild(css);
+                                var links = ev.editor.editable().$.getElementsByTagName('link');
+                                var included = false;
+                                for (var i = 0; i < links.length; i++) {
+                                    if (links[i].getAttribute('href') === 'https://fonts.googleapis.com/css?family=' + v) {
+                                        included = true;
+                                        break;
+                                    }
+                                }
+                                if (!included) {
+                                    var css = document.createElement('link');
+                                    css.setAttribute('type', 'text/css');
+                                    css.setAttribute('rel', 'stylesheet');
+                                    css.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + v);
+                                    ev.editor.editable().$.appendChild(css);
+                                }
                                 ev.editor.applyStyle(new CKEDITOR.style({
                                     element: 'span',
                                     attributes: { },
@@ -65,6 +75,7 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
             message.innerHTML = config.gwfplugin.message.text || '<h5>Enter Google Web Fonts here:</h5>';
             var input = document.createElement('input');
             input.setAttribute('list', 'fontNames');
+            input.setAttribute('id', 'fontNamesInput');
             var dataList = document.createElement('datalist');
             dataList.setAttribute('id', 'fontNames');
             var dataListFallback = document.createElement('select');

@@ -25,11 +25,21 @@ CKEDITOR.plugins.add('ckeditor-gwf-plugin',
                             self.popup.style.top = (window.innerHeight - 200) / 2 + 'px';
                             self.popup.style.left = (window.innerWidth - 150) / 2 + 'px';
                             self.popup.extraClickValue = function (v) {
-                                var css = document.createElement('link');
-                                css.setAttribute('type', 'text/css');
-                                css.setAttribute('rel', 'stylesheet');
-                                css.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + v);
-                                ev.editor.editable().$.appendChild(css);
+                                var links = ev.editor.editable().$.getElementsByTagName('link');
+                                var included = false;
+                                for (var i = 0; i < links.length; i++) {
+                                    if (links[i].getAttribute('href') === 'https://fonts.googleapis.com/css?family=' + v) {
+                                        included = true;
+                                        break;
+                                    }
+                                }
+                                if (!included) {
+                                    var css = document.createElement('link');
+                                    css.setAttribute('type', 'text/css');
+                                    css.setAttribute('rel', 'stylesheet');
+                                    css.setAttribute('href', 'https://fonts.googleapis.com/css?family=' + v);
+                                    ev.editor.editable().$.appendChild(css);
+                                }
                                 ev.editor.applyStyle(new CKEDITOR.style({
                                     element: 'span',
                                     attributes: { },
